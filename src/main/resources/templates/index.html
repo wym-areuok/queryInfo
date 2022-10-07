@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body>
-<p>Test</p>
+<!--  父容器  -->
+<div style="width: 100%; height:100%;">
+  <!--左边子容器   -->
+  <div style="width:685px; height: 660px; border: 2px black solid; float: left; margin-left: 50px;">
+
+    <!-- 左容器输入模块 -->
+    <div style=" width: 250px;height: 200px; margin-top:200px; margin-left: 200px;">
+
+      <input type="text" id="inputNumber" placeholder="qq/手机号/微博uid"><button id= "hand" type="submit">按钮</button></form>
+      <!-- 数据列表 -->
+      <div style="width:400px;height:300px; margin-top: 50px; margin-left: -60px; border: 1px black solid;">
+        <list><ul><li>QQ</li><li id ="qqNum"></li></ul><ul> <li>PHONE</li><li id="phoneNum"></li></ul><ul><li>WB</li><li id="wbNum"></li></ul></list>
+      </div>
+    </div>
+  </div>
+  <!--  右侧容器  -->
+  <div style="width:685px; height:660px; border: 2px black solid; float: left;">
+    <!-- 右侧容器百度搜索模块  -->
+    <div style=" width: 450px;height: 200px;margin-top: 200px;margin-left: 200px;">
+      <!-- 百度搜索 -->
+      <div  style='overflow:hidden'  class="baiduo">
+        <form onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
+          <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w"><input id="baiduInput" class='bdtext' type="text"  name="word"  size="30">
+          <input class='bdbtn' type="submit"value="百度搜索">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    //单机绑定函数
+    $("#hand").click(function(){
+      //判断是否输入为空
+      if($("#inputNumber").val()==null || $("#inputNumber").val().length == 0){
+        alert("你的输入为空");
+      }else{
+        //手机号验证
+        var myreg_tel= /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;   //手机验证1
+        var myreg_tel2 = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/; //手机校验2
+        //qq号验证
+        var reg = /^([1-9][0-9]{4,})$/
+        if(myreg_tel.test($("#inputNumber").val())){
+          $("#phoneNum").html($("#inputNumber").val());
+        }else if(myreg_tel2.test($("#inputNumber").val())){
+          $("#phoneNum").html($("#inputNumber").val());
+        }else if(reg.test($("#inputNumber").val())){
+          $("#qqNum").html($("#inputNumber").val());
+        }
+      }
+      //赋值
+      $("#baiduInput").val($("#inputNumber").val().trim());
+    });
+  </script>
 </body>
 </html>
